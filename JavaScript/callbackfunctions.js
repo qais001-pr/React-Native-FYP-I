@@ -1,10 +1,10 @@
 // // CALL BACK FUNCTIONS
 // // anonymous
-let greetings = function () {
-    console.log('Welcome Dear Students')
-}
-greetings = function () { console.log('Allah Hafiz') }
-greetings();
+// let greetings = function () {
+//     console.log('Welcome Dear Students')
+// }
+// greetings = function () { console.log('Allah Hafiz') }
+// greetings();
 // // let add = function (a, b) { console.log('Sume = ' + (a + b)) }
 // // let v1 = 55;
 // // add(v1, 66);

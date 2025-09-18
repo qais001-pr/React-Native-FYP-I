@@ -101,7 +101,6 @@ function generate() {
         console.log(`Name: ${orderElement.name}, Price: ${orderElement.price}, Quantity: ${orderElement.pQuantity}`)
     }
     console.log('---------------------')
-    console.log()
     console.log('Thank you, Visit Again')
 }
 placeOrder("Rice", 2)
