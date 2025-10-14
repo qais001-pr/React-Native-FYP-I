@@ -20,9 +20,21 @@ import { AppRegistry } from 'react-native';
 // import ShoppingBillCalculator from './screens/week5/ShoppingBillCalculator';
 // Age Calculator [ Focus on useState]
 // import AgeCalculator from './screens/week5/AgeCalculator';
+// import StudentPortal from './screens/week5/StudentPortal';
 
-import StudentPortal from './screens/week5/StudentPortal';
+// Discuss in Week 6
+// CheckBox
+// import CheckBox from './screens/week6/CheckBox';
+// Radio Button
+// import RadioButton from './screens/week6/RadioButton';
+// Task
+// import TaskEmployeeePortal from './screens/week6/TaskEmployeeePortal';
 
+// Discuss in Week 7 
+// Assignment No 1
+
+// Parking System
+import App from './screens/week7/Assignment1/ParkingSystem/App';
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => StudentPortal);
+AppRegistry.registerComponent(appName, () => App);

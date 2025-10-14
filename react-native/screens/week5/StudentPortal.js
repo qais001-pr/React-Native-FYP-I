@@ -2,12 +2,12 @@
 /* eslint-disable eol-last */
 /* eslint-disable semi */
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
-import { Checkbox, RadioButton } from 'react-native-paper'
 import React, { useState } from 'react'
 export default function StudentPortal() {
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
     const [cgpa, setCgpa] = useState('')
+    const [section, setSection] = useState('')
     const [search, setSearch] = useState(false)
     const [studentList, setStudentList] = useState([]);
 
@@ -20,7 +20,7 @@ export default function StudentPortal() {
         if (checkStudent()) {
             return;
         }
-        setStudentList((prevData) => [...prevData, { name: name, age: age, cgpa: cgpa }])
+        setStudentList((prevData) => [...prevData, { name: name, age: age, cgpa: cgpa, section: section }])
     }
 
 
@@ -29,6 +29,7 @@ export default function StudentPortal() {
         if (student) {
             setAge(student.age)
             setCgpa(student.cgpa)
+            setSection(student.section)
             setSearch(true)
         } else {
             setAge('')
@@ -40,6 +41,7 @@ export default function StudentPortal() {
         setName('')
         setAge('')
         setCgpa('')
+        setSection('')
     }
 
 
@@ -93,6 +95,20 @@ export default function StudentPortal() {
                 </View>
             </View>
 
+            <View style={styles.TextInputContainer}>
+                <View>
+                    <Text style={styles.TextInputLabel}>Section</Text>
+                </View>
+                <View>
+                    <TextInput
+                        value={section}
+                        onChangeText={setSection}
+                        placeholder='Enter Section Here.........'
+                        style={styles.TextInput}
+                        inputMode='text'
+                    />
+                </View>
+            </View>
 
             <View style={styles.ButtonContainer}>
                 <View style={styles.Button}>
@@ -124,9 +140,37 @@ export default function StudentPortal() {
 
                 </View>
             </View>
+            <View style={styles.ResultContainer}>
+                <View style={styles.ResultHeader}>
+                    <Text style={styles.resultHeaderText}>
+                        Student List
+                    </Text>
+                </View>
+                <View>
+                    {search || searchStudent ?
+                        studentList.map((student, index) => (
+                            <View key={student.name + 1} style={styles.ResultRow}>
+                                <Text style={styles.ResultLabel}>
+                                    {index + 1}.
+                                </Text>
+                                <Text style={styles.ResultLabel}>
+                                    Name: {student.name}
+                                </Text>
+                                <Text>
+                                    Age: {student.age}
+                                </Text>
+                                <Text>
+                                    CGPA: {student.cgpa}
+                                </Text>
+                                <Text>
+                                    Section: {student.section}
+                                </Text>
+                            </View>
+                        ))
+                        : <Text>No Student Found</Text>
+                    }
+                </View>
 
-            <View>
-                <Text>{search ? (!studentList) ? '' : JSON.stringify(studentList) : ''}</Text>
             </View>
         </View>
     )
@@ -175,7 +219,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
     },
     ButtonContainer: {
-        // flexDirection: 'row',
+        flexDirection: 'row',
         justifyContent: 'space-around',
         marginTop: 20,
     },
@@ -183,5 +227,19 @@ const styles = StyleSheet.create({
         margin: 2,
         padding: 5,
     },
+    ResultContainer: {
+        padding: 10,
+    },
+    ResultHeader: {
 
+    },
+    resultHeaderText: {
+        fontSize: 19,
+        fontWeight: '600',
+    },
+    ResultCard: {
+        padding: 10
+    },
+    ResultRow: { flexDirection: 'row', gap: 10, marginTop: 10 },
+    ResultLabel: { fontSize: 16, },
 })
