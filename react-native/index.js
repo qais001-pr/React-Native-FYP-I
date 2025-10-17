@@ -30,11 +30,20 @@ import { AppRegistry } from 'react-native';
 // Task
 // import TaskEmployeeePortal from './screens/week6/TaskEmployeeePortal';
 
-// Discuss in Week 7 
+// Discuss in Week 7
 // Assignment No 1
-
 // Parking System
 import App from './screens/week7/Assignment1/ParkingSystem/App';
+// Secret Code Unlocker
+// import SecretCodeUnlocker from './screens/week7/learn/SecretCodeUnlocker';
+
+// Quiz App
+import QuizApp from './screens/week7/Task/QuizApp';
+
+// FlatList Screen App
+import FlatlistsScreen from './screens/week7/FlatlistsScreen';
+
+
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => FlatlistsScreen);

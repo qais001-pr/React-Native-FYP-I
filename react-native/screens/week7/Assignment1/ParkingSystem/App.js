@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
     View,
     Text,
@@ -5,23 +6,19 @@ import {
     FlatList,
     StyleSheet,
     TextInput as TextRN,
-    Alert
+    Alert,
 } from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function App() {
-    const [radioValue, setRadioValue] = useState('Car');
+    const [radioValue, setRadioValue] = useState('car');
     const [registrationNumber, setRegistrationNumber] = useState('');
     const [totalAmount, setTotalAmount] = useState(0);
     const [searchText, setSearchText] = useState('');
 
     const [parkingList, setParkingList] = useState([
-        {
-            icon: 'car',
-            regNo: 'IDL-5091',
-        },
     ]);
 
     const findVehicleExistsOrNot = (regno) => {
@@ -118,27 +115,24 @@ export default function App() {
 
                 {/* Radio Buttons */}
                 <View style={styles.radioButtonContainer}>
-                    <RadioButton.Group
-                        value={radioValue}
-                        onValueChange={(val) => setRadioValue(val)}
-                    >
-                        <View style={styles.radioRow}>
-                            <View style={styles.radioOption}>
-                                <RadioButton
-                                    value="Car"
-                                    color="rgba(20, 126, 73, 1)"
-                                />
-                                <Text style={styles.radioLabel}>Car</Text>
-                            </View>
-                            <View style={styles.radioOption}>
-                                <RadioButton
-                                    value="Bike"
-                                    color="rgba(20, 126, 73, 1)"
-                                />
-                                <Text style={styles.radioLabel}>Bike</Text>
-                            </View>
+                    <View style={styles.radioRow}>
+                        <View style={styles.radioOption}>
+                            <RadioButton
+                                status={radioValue === 'car' ? 'checked' : 'unchecked'}
+                                color="rgba(20, 126, 73, 1)"
+                                onPress={() => setRadioValue('car')}
+                            />
+                            <Text style={styles.radioLabel}>Car</Text>
                         </View>
-                    </RadioButton.Group>
+                        <View style={styles.radioOption}>
+                            <RadioButton
+                                status={radioValue === 'motorcycle' ? 'checked' : 'unchecked'}
+                                color="rgba(20, 126, 73, 1)"
+                                onPress={() => setRadioValue('motorcycle')}
+                            />
+                            <Text style={styles.radioLabel}>Bike</Text>
+                        </View>
+                    </View>
                 </View>
 
                 <View style={styles.parkInButton}>
@@ -166,6 +160,8 @@ export default function App() {
                 data={filteredList}
                 renderItem={renderItems}
                 keyExtractor={(item) => item.regNo}
+                ListEmptyComponent={() => (<View
+                    style={{ padding: 10, margin: 10 }}><Text style={{ fontSize: 20, textAlign: 'center' }}>No Vehicle Found </Text></View>)}
             />
         </View>
     );
