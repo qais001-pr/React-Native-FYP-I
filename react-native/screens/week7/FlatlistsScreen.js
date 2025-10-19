@@ -35,7 +35,9 @@ export default function FlatlistsScreen() {
       <View>
         <Text>FlatlistsScreen</Text>
       </View>
-      <View>
+      <View
+        style={{ margin: 20, padding: 10, borderWidth: 1, borderColor: 'black' }}
+      >
         <TextInput
           placeholder='Enter Name'
           inputMode='text'
@@ -44,7 +46,7 @@ export default function FlatlistsScreen() {
         />
       </View>
 
-      <View>
+      <View style={{ margin: 20, padding: 10, borderWidth: 1, borderColor: 'black' }}>
         <TextInput
           placeholder='Enter CGPA'
           inputMode='decimal'
@@ -53,32 +55,46 @@ export default function FlatlistsScreen() {
         />
       </View>
 
-      <View>
+      <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
         <Button title='Submit' onPress={addStudent} />
       </View>
 
 
       <FlatList
-        keyExtractor={(item) => { item.id }}
+        keyExtractor={(item) => item.id}
         data={students}
         renderItem={({ item }) => (
-          <View>
-            <View>
-              <Text>
-                Name: {item.name}
-              </Text>
+          <View style={{
+            flexDirection: 'row',
+            borderWidth: 3,
+            padding: 4, justifyContent: 'space-around',
+          }}>
+            <View >
+              <View>
+                <Text>
+                  Name: {item.name}
+                </Text>
+              </View>
+              <View>
+                <Text>
+                  CGPA: {item.cgpa}
+                </Text>
+              </View>
             </View>
+
+
             <View>
-              <Text>
-                CGPA: {item.cgpa}
-              </Text>
+              <View>
+                <Button title='View' onPress={() => view(item)} />
+              </View>
+              <View>
+                <Button title='Delete' onPress={() => deleteS(item.id)} />
+              </View>
             </View>
-            <View>
-              <Button title='View' onPress={() => view(item)} />
-            </View>
-            <View>
-              <Button title='Delete' onPress={() => deleteS(item.id)} />
-            </View>
+
+
+
+
           </View>
         )}
       />

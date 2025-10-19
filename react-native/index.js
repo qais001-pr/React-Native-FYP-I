@@ -33,17 +33,20 @@ import { AppRegistry } from 'react-native';
 // Discuss in Week 7
 // Assignment No 1
 // Parking System
-import App from './screens/week7/Assignment1/ParkingSystem/App';
+// import App from './screens/week7/Assignment1/ParkingSystem/App';
 // Secret Code Unlocker
 // import SecretCodeUnlocker from './screens/week7/learn/SecretCodeUnlocker';
 
 // Quiz App
-import QuizApp from './screens/week7/Task/QuizApp';
+// import QuizApp from './screens/week7/Task/QuizApp';
 
 // FlatList Screen App
-import FlatlistsScreen from './screens/week7/FlatlistsScreen';
+// import FlatlistsScreen from './screens/week7/FlatlistsScreen';
 
+import QuizClass from './screens/week7/QuizClass';
+
+import FormCalories from './screens/week7/FormCalories';
 
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => FlatlistsScreen);
+AppRegistry.registerComponent(appName, () => FormCalories);
