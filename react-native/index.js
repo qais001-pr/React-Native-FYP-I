@@ -42,11 +42,13 @@ import { AppRegistry } from 'react-native';
 
 // FlatList Screen App
 // import FlatlistsScreen from './screens/week7/FlatlistsScreen';
+// import QuizClass from './screens/week7/QuizClass';
+// import FormCalories from './screens/week7/FormCalories';
 
-import QuizClass from './screens/week7/QuizClass';
 
-import FormCalories from './screens/week7/FormCalories';
 
+// week 8
+import Crud from './screens/week8/Crud';
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => FormCalories);
+AppRegistry.registerComponent(appName, () => Crud);
