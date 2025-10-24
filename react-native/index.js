@@ -48,7 +48,13 @@ import { AppRegistry } from 'react-native';
 
 
 // week 8
-import Crud from './screens/week8/Crud';
+// import Crud from './screens/week8/Crud';
+
+// Sqlite Storage Local Database
+// import myApp from './screens/week8/Employeeportal/myApp';
+
+// Daily Expense Tracker
+import myApp from './screens/week8/ExpensePortal/myApp';
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => Crud);
+AppRegistry.registerComponent(appName, () => myApp);

@@ -33,8 +33,8 @@ export default function Crud() {
         setCityPoplation(item.cityPopulation.toString())
     }
     let deleteItem = (n) => {
-        let deleteItem = list.find((l) => l.cityName === n)
-        setdeletedlist([...deletedlist, deleteItem])
+        let deleteItems = list.find((l) => l.cityName === n)
+        setdeletedlist([...deletedlist, deleteItems])
         let filtered = list.filter((l) => l.cityName !== n)
         setlist(filtered)
     }
