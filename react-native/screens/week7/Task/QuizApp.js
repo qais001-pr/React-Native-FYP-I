@@ -1,14 +1,18 @@
+/* eslint-disable curly */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable semi */
 /* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import { RadioButton } from "react-native-paper";
 const QuizApp = () => {
     const [index, setIndex] = useState(0);
     const [option, setoption] = useState('option1');
     const [score, setscore] = useState(0);
+    const [disabledButton, setdisabledornot] = useState(false)
+    const [timeout, settimeout] = useState(15)
     const [quizList, setQuizList] = useState([
         {
             question: 'What is the Capital of Pakistan?',
@@ -17,6 +21,7 @@ const QuizApp = () => {
             option3: 'Karachi',
             option4: 'Peshawar',
             solution: 'option2',
+            disabled: false,
         },
         {
             question: 'Who wrote the national anthem of Pakistan?',
@@ -25,6 +30,7 @@ const QuizApp = () => {
             option3: 'Faiz Ahmed Faiz',
             option4: 'Ahmad Faraz',
             solution: 'option2',
+            disabled: false,
         },
         {
             question: 'In which year did Pakistan gain independence?',
@@ -33,6 +39,7 @@ const QuizApp = () => {
             option3: '1947',
             option4: '1950',
             solution: 'option3',
+            disabled: false,
         },
         {
             question: 'What is the national language of Pakistan?',
@@ -41,6 +48,7 @@ const QuizApp = () => {
             option3: 'Sindhi',
             option4: 'Pashto',
             solution: 'option2',
+            disabled: false,
         },
         {
             question: 'Which is the largest province of Pakistan by area?',
@@ -49,19 +57,18 @@ const QuizApp = () => {
             option3: 'Balochistan',
             option4: 'Khyber Pakhtunkhwa',
             solution: 'option3',
+            disabled: false,
         },
     ]);
 
 
     let nextQuestion = () => {
-        if (index + 1 === quizList.length) {
-            return;
-        }
-        else {
-            setoption('option1')
-            setIndex(index + 1);
-        }
+        if (index + 1 === quizList.length) return;
+        setoption('option1');
+        settimeout(15);
+        setIndex(index + 1);
     };
+
     let previousQuestion = () => {
         if (index === 0) { return; }
         else if (index > 0) {
@@ -84,6 +91,17 @@ const QuizApp = () => {
             }
         }
     }
+    useEffect(() => {
+        if (timeout > 0 && !quizList[index].disabled) {
+            const timer = setTimeout(() => settimeout(timeout - 1), 1000);
+            return () => clearTimeout(timer);
+        } else if (timeout === 0) {
+            const updatedList = [...quizList];
+            updatedList[index].disabled = true;
+            setQuizList(updatedList);
+        }
+    }, [timeout, index]);
+
     return (
         <View style={{ flex: 1, backgroundColor: '#7c7878ff' }}>
             <View style={{ backgroundColor: '#fff', padding: 20, marginTop: 30 }}>
@@ -146,6 +164,7 @@ const QuizApp = () => {
                 }
                 < View style={{ width: '30%' }}>
                     <Button
+                        disabled={quizList[index].disabled}
                         title="Submit"
                         color={'#1f0c0cff'}
                         onPress={SubmitAnswer}
@@ -165,6 +184,11 @@ const QuizApp = () => {
 
 
             <View style={{ backgroundColor: '#f3e9e9ff', padding: 20, margin: 60, alignItems: 'center' }}>
+                <View style={{ padding: 10 }}>
+                    <Text style={{ fontSize: 19, color: '#000000ff' }}>
+                        Timeout :{timeout}
+                    </Text>
+                </View>
                 <View style={{ padding: 10 }}>
                     <Text style={{ fontSize: 19, color: '#000000ff' }}>
                         Total Questions:{quizList.length}

@@ -38,7 +38,7 @@ import { AppRegistry } from 'react-native';
 // import SecretCodeUnlocker from './screens/week7/learn/SecretCodeUnlocker';
 
 // Quiz App
-// import QuizApp from './screens/week7/Task/QuizApp';
+//  import QuizApp from './screens/week7/Task/QuizApp';
 
 // FlatList Screen App
 // import FlatlistsScreen from './screens/week7/FlatlistsScreen';
@@ -54,7 +54,11 @@ import { AppRegistry } from 'react-native';
 // import myApp from './screens/week8/Employeeportal/myApp';
 
 // Daily Expense Tracker
-import myApp from './screens/week8/ExpensePortal/myApp';
-import { name as appName } from './app.json';
+// import myApp from './screens/week8/ExpensePortal/myApp';
 
-AppRegistry.registerComponent(appName, () => myApp);
+// Image Picker
+
+import ImageEmployeePortal from './screens/week10/ImageEmployeePortal';
+
+import { name as appName } from './app.json';
+AppRegistry.registerComponent(appName, () => ImageEmployeePortal);
