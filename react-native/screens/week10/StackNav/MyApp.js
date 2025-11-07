@@ -1,72 +1,22 @@
-/* eslint-disable no-alert */
+/* eslint-disable no-sequences */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable semi */
 /* eslint-disable jsx-quotes */
-import { View, Text, ScrollView, StyleSheet, Image, TextInput, TouchableOpacity, FlatList } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { openDatabase } from 'react-native-sqlite-storage'
+/* eslint-disable semi */
+import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView, Image, Button } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
+const Stack = createStackNavigator()
 
-const db = openDatabase({ name: 'employee.db' })
-
-export default function ImageEmployeePortal() {
+function HomeScreen({ navigation }) {
     const [profilepicture, setprofilePicture] = useState(null)
     const [name, setname] = useState('')
     const [eid, seteid] = useState('')
     const [age, setage] = useState('')
     const [gender, setgender] = useState('')
     const [data, setdata] = useState([])
-
-    useEffect(() => {
-        db.transaction(tx => {
-            tx.executeSql(
-            `CREATE TABLE IF NOT EXISTS EmployeeForm (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            profilepicture TEXT,
-            name TEXT,
-            employeeid TEXT,
-            age TEXT,
-            gender TEXT
-        );`
-            )
-        })
-        fetchEmployees()
-    }, [])
-
-    const fetchEmployees = () => {
-        db.transaction(tx => {
-            tx.executeSql('SELECT * FROM EmployeeForm', [], (_, results) => {
-                let temp = []
-                for (let i = 0; i < results.rows.length; ++i) {
-                    temp.push(results.rows.item(i))
-                }
-                setdata(temp)
-            })
-        })
-    }
-    console.log(data)
-
-    const saveEmployee = () => {
-        if (!name || !eid || !age || !gender) {
-            alert('Please fill all fields')
-            return
-        }
-        db.transaction(tx => {
-            tx.executeSql(
-                'INSERT INTO EmployeeForm (profilepicture, name, employeeid, age, gender) VALUES (?,?,?,?,?)',
-                [profilepicture, name, eid, age, gender],
-                (_, results) => {
-                    if (results.rowsAffected > 0) {
-                        alert('Employee saved successfully')
-                        fetchEmployees()
-                    } else {
-                        alert('Failed to save employee')
-                    }
-                }
-            )
-        })
-    }
 
     let openCamera = () => {
         launchCamera({ mediaType: 'photo', quality: 1 }, (response) => {
@@ -92,7 +42,6 @@ export default function ImageEmployeePortal() {
             }
         })
     }
-
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.headerContainer}>
@@ -158,25 +107,54 @@ export default function ImageEmployeePortal() {
                 />
             </View>
 
-            <TouchableOpacity style={styles.btnSubmit} onPress={saveEmployee}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => {
+                navigation.navigate('Details'), {
+                    picture: profilepicture,
+                    name: name,
+                    eid: eid,
+                    age: age,
+                    gender: gender,
+                }
+            }}>
                 <Text style={styles.btnSubmitText}>Submit</Text>
             </TouchableOpacity>
-
-            <Text style={styles.savedText}>Saved Employees:</Text>
-
-            {data.map((item, index) => (
-                <View key={index} style={styles.employeeCard}>
-                    <Image
-                        source={{ uri: item.profilepicture }}
-                        style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10 }}
-                    />
-                    <Text style={{ fontWeight: 'bold' }}>{item.name}</Text>
-                    <Text>ID: {item.employeeid}</Text>
-                    <Text>Age: {item.age}</Text>
-                    <Text>Gender: {item.gender}</Text>
-                </View>
-            ))}
         </ScrollView>
+    )
+}
+
+function DetailsScreen({ route, navigation }) {
+    const { picture,
+        name,
+        eid,
+        age,
+        gender,
+    } = route.params || {};
+    return (
+        <View>
+            <Text>Welcome</Text>
+            <View style={styles.employeeCard}>
+                <Image
+                    source={{ uri: picture }}
+                    style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10 }}
+                />
+                <Text style={{ fontWeight: 'bold' }}>{name || ''}</Text>
+                <Text>ID: {eid || ''}</Text>
+                <Text>Age: {age || ''}</Text>
+                <Text>Gender: {gender || ''}</Text>
+            </View>
+            <Button title='Go To Back' onPress={() => navigation.goBack()} />
+        </View>
+    )
+}
+
+export default function MyApp() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name='Home' component={HomeScreen} />
+                <Stack.Screen name='Details' component={DetailsScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
 

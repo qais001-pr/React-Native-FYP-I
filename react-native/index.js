@@ -58,7 +58,7 @@ import { AppRegistry } from 'react-native';
 
 // Image Picker
 
-import ImageEmployeePortal from './screens/week10/ImageEmployeePortal';
-
+// import ImageEmployeePortal from './screens/week10/ImageEmployeePortal';
+import MyApp from './screens/week10/StackNav/MyApp';
 import { name as appName } from './app.json';
-AppRegistry.registerComponent(appName, () => ImageEmployeePortal);
+AppRegistry.registerComponent(appName, () => MyApp);
