@@ -104,8 +104,8 @@ export default function Login({ navigation }) {
                 </Text>
             </TouchableOpacity>
             <Pressable onPress={() => navigation.navigate('signup')}>
-                <View>
-                    <Text>
+                <View style={{ width: '95%', justifyContent: 'center', alignItems: 'center', backgroundColor: '#dddd', padding: 14, borderRadius: 20, margin: 10 }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'regular' }}>
                         SignUp
                     </Text>
                 </View>

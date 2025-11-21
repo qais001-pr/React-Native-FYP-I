@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable eol-last */
 /* eslint-disable semi */
-import { View, Text, Pressable, FlatList, Alert } from 'react-native'
+import { View, Text, Pressable, FlatList, Alert, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { openDatabase } from 'react-native-sqlite-storage'
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -50,7 +50,12 @@ export default function HomeScreen({ navigation, route }) {
                         {/* <Text>
                             {JSON.stringify(data)}
                         </Text> */}
-
+                        <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
+                            <TextInput
+                                placeholder='Enter Name'
+                            />
+                            <Icon name='search' size={24} />
+                        </View>
                         <FlatList
                             data={data}
                             keyExtractor={(item) => item.id.toString()}
@@ -58,13 +63,16 @@ export default function HomeScreen({ navigation, route }) {
                                 return (
                                     <View style={{ justifyContent: 'space-between', padding: 10 }}>
                                         <Text style={{ fontSize: 20 }}>
+                                            {item.fullname}
+                                        </Text>
+                                        <Text style={{ fontSize: 20 }}>
                                             {item.email}
                                         </Text>
                                         <Text style={{ fontSize: 20 }}>
                                             {item.password}
                                         </Text>
                                         <Pressable onPress={() => deleteuser(item.id)}>
-                                            <Icon name='remove' size={25} color={'blue'} />
+                                            <Icon name='delete' size={25} color={'blue'} />
                                         </Pressable>
                                     </View>
                                 )
