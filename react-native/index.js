@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * @format
  */
@@ -59,6 +60,7 @@ import { AppRegistry } from 'react-native';
 // Image Picker
 
 // import ImageEmployeePortal from './screens/week10/ImageEmployeePortal';
-import MyApp from './screens/week10/StackNav/MyApp';
+// import MyApp from './screens/week10/StackNav/MyApp';
+import Auth from './screens/week12/Auth';
 import { name as appName } from './app.json';
-AppRegistry.registerComponent(appName, () => MyApp);
+AppRegistry.registerComponent(appName, () => Auth);
